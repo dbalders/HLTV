@@ -29,7 +29,9 @@ export const getTeamStats = (config: HLTVConfig) => async ({
   const getPlayersByContainer = (container) =>
     toArray(container.find('.image-and-label')).map((playerEl) => ({
       id: Number(playerEl.attr('href')!.split('/')[3]),
-      name: playerEl.find('.text-ellipsis').text()
+      name: playerEl.find('.text-ellipsis').text(),
+      flag: playerEl.find('img').attr('src'),
+      img: playerEl.parent().parent().find('img').first().attr('src')
     }))
 
   const currentLineup = getPlayersByContainer(
