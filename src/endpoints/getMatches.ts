@@ -19,12 +19,14 @@ export const getMatches = (config: HLTVConfig) => async (): Promise<
 
       const team1: Team = {
         name: teamNameEls.first().text(),
-        id: Number(matchEl.attr('team1')) || undefined
+        id: Number(matchEl.attr('team1')) || undefined,
+        logo: teamNameEls.first().parent().find('img').attr('src')
       }
 
       const team2: Team = {
         name: teamNameEls.last().text(),
-        id: Number(matchEl.attr('team2')) || undefined
+        id: Number(matchEl.attr('team2')) || undefined,
+        logo: matchEl.find('.team2 .matchTeamLogoContainer img').attr('src')
       }
 
       const format = matchEl.find('.matchMeta').text()
@@ -59,14 +61,16 @@ export const getMatches = (config: HLTVConfig) => async (): Promise<
       if (!title) {
         team1 = {
           name: matchEl.find('.team1 .matchTeamName').text(),
-          id: Number(matchEl.attr('team1')) || undefined
+          id: Number(matchEl.attr('team1')) || undefined,
+          logo: matchEl.find('.team1 .matchTeamLogoContainer img').attr('src')
         }
 
         team2 = {
           name:
             matchEl.find('.team2 .matchTeamName').text() ||
             matchEl.find('.team2 .team').text(),
-          id: Number(matchEl.attr('team2')) || undefined
+          id: Number(matchEl.attr('team2')) || undefined,
+          logo: matchEl.find('.team2 .matchTeamLogoContainer img').attr('src')
         }
         event = {
           name: matchEl.find('.matchEventLogo').attr('alt')!,
